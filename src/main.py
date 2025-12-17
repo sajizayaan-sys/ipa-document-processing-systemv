@@ -55,8 +55,6 @@ def process_files():
             }
 
             results.append(info)
- 
-        return results
 
         except Exception as e:
             logging.error(f"Failed processing {file}: {e}")
