@@ -34,5 +34,31 @@ This system aims to reduce manual effort, errors, and processing time.
 - [ ] Production-ready
 
 
+## Features
+- Automated file ingestion
+- Metadata extraction (filename, size, timestamp)
+- Structured reporting
+- Robust error handling
+- Audit-grade logging
+- Graceful failure (system continues on errors)
+
+
+## How to Run
+1. Clone the repository
+2. Place files into src/input/
+3. Run:
+   python src/main.py
+4. View results in:
+   - src/output/report.txt
+   - src/logs/automation.log
+
+
+## Logging
+All processing activity and errors are logged to:
+- src/logs/automation.log
+
+Logs include timestamps, severity levels, and error details.
+
+
 ## Notes
 This project is being built as a learning-focused but enterprise-minded system.
