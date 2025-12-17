@@ -1,9 +1,12 @@
-# Python
+# Python cache and virtual environment
 .venv/
 __pycache__/
 *.pyc
 
-# Output files
+# Logs
+src/logs/
+
+# Generated Output 
 src/output/
 
 # OS
