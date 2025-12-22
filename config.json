@@ -1,0 +1,4 @@
+{
+  "recursive": true,
+  "allowed_extensions": [".pdf", ".txt"]
+}

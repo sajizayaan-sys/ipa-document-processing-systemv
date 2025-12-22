@@ -45,3 +45,13 @@ The system can now:
 =======
 1a4834df67452a77a9a167e9f87cac4c2bab25f4
 >>>>>>> 9ef464e583dd56a293bf46661f823c024fa66053
+
+## Day 5 Update – File-Type Aware Processing
+
+The system now:
+- Detects file types explicitly
+- Processes only supported document formats
+- Skips unsupported files safely
+- Detects empty or failed text extraction
+- Logs all decisions for audit and debugging
+

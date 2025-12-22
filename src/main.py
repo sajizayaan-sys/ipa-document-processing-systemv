@@ -1,6 +1,11 @@
+import json
+import argparse
 from pathlib import Path
 from datetime import datetime
 import logging
+
+SUPPORTED_TEXT_EXTENSIONS = [".txt", ".pdf"]
+
 
 LOG_DIR = Path(__file__).resolve().parent / "logs"
 LOG_DIR.mkdir(exist_ok=True)
@@ -36,24 +41,40 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 INPUT_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
 
+def load_config():
+    with open("config.json", "r", encoding="utf-8") as f:
+        return json.load(f)
 
-def process_files():
+
+def process_files(recursive=False) :
+
     results = []
 
-    for file in INPUT_DIR.iterdir():
+    iterator = INPUT_DIR.rglob("*") if recursive else INPUT_DIR.iterdir()
+    
+    for file in iterator:
+
         try:
             if not file.is_file():
                 continue
 
-            text = extract_text_from_file(file)
+            if file.suffix.lower() not in SUPPORTED_TEXT_EXTENSIONS:
+                logging.warning(f"Skipped unsupported file: {file.name}")
+                continue
 
+            text = extract_text_from_file(file)
+            
+            if not text.strip():
+                logging.warning(f"No text found in file: {file.name}")          
+            
             info = {
                 "filename": file.name,
+                "extension": file.suffix.lower(),
                 "size_bytes": file.stat().st_size,
                 "text_length": len(text),
                 "processed_at": datetime.utcnow().isoformat()
             }
-
+           
             results.append(info)
             logging.info(f"Processed file: {file.name}")
 
@@ -82,10 +103,53 @@ def generate_report(results):
 
     return report_path
 
-if __name__ == "__main__":
-    logging.info("Automation started")
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Document Processing Automation"
+    )
 
-    data = process_files()
+    parser.add_argument(
+        "--input",
+        type=str,
+        default="src/input",
+        help="Input folder path"
+    )
+
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="src/output",
+        help="Output folder path"
+    )
+
+    parser.add_argument(
+        "--recursive",
+        action="store_true",
+        help="Recursively scan subdirectories"
+    )
+
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+   
+    args = parse_args()
+
+    INPUT_DIR = Path(args.input).resolve()
+    OUTPUT_DIR = Path(args.output).resolve()
+
+    INPUT_DIR.mkdir(exist_ok=True)
+    OUTPUT_DIR.mkdir(exist_ok=True)
+
+    logging.info("Automation started")
+    logging.info(f"Input directory: {INPUT_DIR}")
+    logging.info(f"Output directory: {OUTPUT_DIR}")
+    logging.info(f"Recursive scan: {args.recursive}")
+
+    if not any(INPUT_DIR.iterdir()):
+        logging.warning("Input directory is empty")
+
+    data = process_files(recursive=args.recursive)
     report = generate_report(data)
 
     logging.info(f"Processed {len(data)} files")
@@ -93,4 +157,3 @@ if __name__ == "__main__":
 
     print(f"Processed {len(data)} files.")
     print(f"Report saved to: {report}")
-
