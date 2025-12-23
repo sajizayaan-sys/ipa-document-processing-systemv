@@ -19,15 +19,11 @@ This workflow will evolve as the system is built.
 
 ## Day 2 Update – Local File Processing
 
-1a4834df67452a77a9a167e9f87cac4c2bab25f4
 The system can now:
 - Scan files from an input directory
 - Extract basic metadata (name, size)
 - Generate a processing report
 - Store output in a structured folder
-HEAD
-This forms the base of future document automation.
-
 
 This forms the base of future document automation.
 

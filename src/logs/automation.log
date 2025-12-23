@@ -33,3 +33,27 @@
 2025-12-18 01:26:10,379 | INFO | Report generated successfully
 2025-12-18 01:26:10,379 | INFO | Processed 2 files
 2025-12-18 01:26:10,379 | INFO | Report saved to: C:\Users\manju\ipawork\ipa-document-processing-system\src\output\report.txt
+2025-12-23 23:53:22,907 | INFO | Automation started
+2025-12-23 23:53:22,907 | INFO | Input directory: C:\Users\manju\ipawork\ipa-document-processing-system\src\input
+2025-12-23 23:53:22,907 | INFO | Output directory: C:\Users\manju\ipawork\ipa-document-processing-system\src\output
+2025-12-23 23:53:22,907 | INFO | Recursive scan: False
+2025-12-23 23:53:22,908 | WARNING | No text found in file: notext.txt
+2025-12-23 23:53:22,980 | INFO | Processed file: sample.pdf
+2025-12-23 23:53:22,981 | WARNING | Skipped unsupported file: shiny evidence 3.png
+2025-12-23 23:53:22,981 | WARNING | Skipped unsupported file: WIN_20250424_19_04_10_Pro.jpg
+2025-12-23 23:53:22,984 | INFO | Processed file: zayaan.txt
+2025-12-23 23:53:22,985 | INFO | Report generated successfully
+2025-12-23 23:53:22,985 | INFO | Processed 2 files
+2025-12-23 23:53:22,985 | INFO | Report saved to: C:\Users\manju\ipawork\ipa-document-processing-system\src\output\report.txt
+2025-12-23 23:53:49,869 | INFO | Automation started
+2025-12-23 23:53:49,869 | INFO | Input directory: C:\Users\manju\ipawork\ipa-document-processing-system\src\input
+2025-12-23 23:53:49,869 | INFO | Output directory: C:\Users\manju\ipawork\ipa-document-processing-system\src\output
+2025-12-23 23:53:49,869 | INFO | Recursive scan: False
+2025-12-23 23:53:49,870 | WARNING | No text found in file: notext.txt
+2025-12-23 23:53:49,936 | INFO | Processed file: sample.pdf
+2025-12-23 23:53:49,936 | WARNING | Skipped unsupported file: shiny evidence 3.png
+2025-12-23 23:53:49,936 | WARNING | Skipped unsupported file: WIN_20250424_19_04_10_Pro.jpg
+2025-12-23 23:53:49,936 | INFO | Processed file: zayaan.txt
+2025-12-23 23:53:49,937 | INFO | Report generated successfully
+2025-12-23 23:53:49,937 | INFO | Processed 2 files
+2025-12-23 23:53:49,937 | INFO | Report saved to: C:\Users\manju\ipawork\ipa-document-processing-system\src\output\report.txt
