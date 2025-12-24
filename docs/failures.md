@@ -8,26 +8,16 @@
 - Issue: Extracted data may be incomplete
 - Handling: Validation rules and confidence thresholds
 
-HEAD
 ## Missing or Empty Input Directory
 - Issue: No files to process
 - Handling: System still generates empty report
 
-
-This list will grow as development continues.
-
-This list will grow as development continues.
-
 ## Missing or Empty Input Directory
 - Issue: No files to process
 - Handling: System still generates empty report
-<<<<<<< HEAD
 
 ## Scanned or Image-Based PDFs
 - Issue: Some PDFs contain images instead of text
 - Handling: Text extraction returns empty result
 - Future: OCR integration required
 
-=======
- 1a4834df67452a77a9a167e9f87cac4c2bab25f4
->>>>>>> 9ef464e583dd56a293bf46661f823c024fa66053
