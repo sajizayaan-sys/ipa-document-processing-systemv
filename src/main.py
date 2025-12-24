@@ -30,16 +30,28 @@ logging.basicConfig(
 
 print("RUNNING UPDATED VERSION")
 
-from processors.text_extractor import extract_text_from_file
+
 
 from pathlib import Path
 from datetime import datetime
 
+<<<<<<< HEAD
 # Define directories
+=======
+ 
+#Define directories
+
+# Define directories
+ 
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_DIR = BASE_DIR / "input"
 OUTPUT_DIR = BASE_DIR / "output"
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 #Create Directories if they dont exist
 INPUT_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -52,6 +64,7 @@ def load_config():
     with open("config.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
+<<<<<<< HEAD
 def analyze_document(text: str) -> dict:
     if not text or len(text.strip()) < 50:
         logging.warning("Text too short for AI analysis")
@@ -87,6 +100,9 @@ Text:
     except Exception as e:
         logging.error(f"LLM analysis failed: {e}")
         return {}
+=======
+from processors.text_extractor import extract_text_from_file
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 
 def process_files(recursive=False) :
     results = []
@@ -117,12 +133,18 @@ def process_files(recursive=False) :
                 "filename": file.name,
                 "extension": file.suffix.lower(),
                 "size_bytes": file.stat().st_size,
+<<<<<<< HEAD
                 "text_length": len(text),
                 "processed_at": datetime.utcnow().isoformat(),
                 "document_type": analysis.get("document_type"),
                 "summary": analysis.get("summary")
 }
 
+=======
+                "processed_at": datetime.utcnow().isoformat()
+            }
+           
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
             results.append(info)
 
             # Save extracted text
@@ -136,12 +158,26 @@ def process_files(recursive=False) :
 
     return results
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 def generate_report(results):
     report_path = OUTPUT_DIR / "document_analysis_report.pdf"
 
     try:
+<<<<<<< HEAD
         c = canvas.Canvas(str(report_path), pagesize=A4)
         width, height = A4
+=======
+        with report_path.open("w", encoding="utf-8") as f:
+            for item in results:
+                f.write(
+                    f"File: {item['filename']} | "
+                    f"Size: {item['size_bytes']} bytes | "
+                    f"Processed: {item['processed_at']}\n"
+                )
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 
         y = height - 2 * cm
 

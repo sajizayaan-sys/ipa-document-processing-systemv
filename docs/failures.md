@@ -14,6 +14,7 @@
 
 ## Missing or Empty Input Directory
 - Issue: No files to process
+<<<<<<< HEAD
 - Handling: System still generates empty report
 
 ## Scanned or Image-Based PDFs
@@ -21,3 +22,6 @@
 - Handling: Text extraction returns empty result
 - Future: OCR integration required
 
+=======
+- Handling: System still generates empty report
+>>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
