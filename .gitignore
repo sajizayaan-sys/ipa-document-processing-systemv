@@ -1,14 +1,21 @@
 # Python cache and virtual environment
-.venv/
 __pycache__/
 *.pyc
-.env  
-
 # Logs
+logs/
 src/logs/
 
-# Generated Output 
+# Reports / outputs
+report.txt
+report.json
+output/
 src/output/
+extracted_text/
+src/output/extracted_text/
+
+# Environment
+.env
+.venv/
 
 # OS
 .DS_Store

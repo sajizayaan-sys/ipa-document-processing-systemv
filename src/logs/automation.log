@@ -57,3 +57,20 @@
 2025-12-23 23:53:49,937 | INFO | Report generated successfully
 2025-12-23 23:53:49,937 | INFO | Processed 2 files
 2025-12-23 23:53:49,937 | INFO | Report saved to: C:\Users\manju\ipawork\ipa-document-processing-system\src\output\report.txt
+2025-12-24 17:54:48,777 | INFO | Automation started
+2025-12-24 17:54:48,777 | INFO | Input directory: C:\Users\zayaa\Documents\works\ipa-document-processing-system\src\input
+2025-12-24 17:54:48,777 | INFO | Output directory: C:\Users\zayaa\Documents\works\ipa-document-processing-system\src\output
+2025-12-24 17:54:48,777 | INFO | Recursive scan: False
+2025-12-24 17:54:48,799 | INFO | Extracted text from PDF: index.pdf
+2025-12-24 17:54:52,083 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 17:54:52,097 | INFO | Processed file: index.pdf
+2025-12-24 17:54:52,097 | WARNING | No text found in file: notext.txt
+2025-12-24 17:54:52,236 | INFO | Extracted text from PDF: sample.pdf
+2025-12-24 17:54:53,746 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 17:54:53,750 | INFO | Processed file: sample.pdf
+2025-12-24 17:54:53,751 | WARNING | No text found in file: shiny evidence 3.png
+2025-12-24 17:54:55,131 | INFO | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 17:54:55,189 | INFO | Processed file: zayaan.txt
+2025-12-24 17:54:55,196 | INFO | PDF report generated successfully
+2025-12-24 17:54:55,196 | INFO | Processed 3 files
+2025-12-24 17:54:55,196 | INFO | Report saved to: C:\Users\zayaa\Documents\works\ipa-document-processing-system\src\output\document_analysis_report.pdf

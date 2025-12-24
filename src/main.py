@@ -1,23 +1,30 @@
-from processors.pdf_extractor import extract_text_from_pdf
 import json
 import argparse
-from pathlib import Path
-from datetime import datetime
 import logging
 import os
+from pathlib import Path
+from datetime import datetime
+
 from dotenv import load_dotenv
 from openai import OpenAI
+
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import cm
 
+from processors.text_extractor import extract_text_from_file
+from processors.pdf_extractor import extract_text_from_pdf
 
-load_dotenv()  # loads .env file
+# =======================
+# ENV & CLIENT SETUP
+# =======================
 
+load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
-SUPPORTED_TEXT_EXTENSIONS = [".txt", ".pdf"]
+# =======================
+# LOGGING SETUP
+# =======================
 
 LOG_DIR = Path(__file__).resolve().parent / "logs"
 LOG_DIR.mkdir(exist_ok=True)
@@ -30,41 +37,31 @@ logging.basicConfig(
 
 print("RUNNING UPDATED VERSION")
 
+# =======================
+# DIRECTORIES
+# =======================
 
-
-from pathlib import Path
-from datetime import datetime
-
-<<<<<<< HEAD
-# Define directories
-=======
- 
-#Define directories
-
-# Define directories
- 
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_DIR = BASE_DIR / "input"
 OUTPUT_DIR = BASE_DIR / "output"
+TEXT_OUTPUT_DIR = OUTPUT_DIR / "extracted_text"
 
-<<<<<<< HEAD
-=======
- 
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
-#Create Directories if they dont exist
 INPUT_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
-
-TEXT_OUTPUT_DIR = OUTPUT_DIR / "extracted_text"
 TEXT_OUTPUT_DIR.mkdir(exist_ok=True)
 
+# =======================
+# CONFIG
+# =======================
 
 def load_config():
     with open("config.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
-<<<<<<< HEAD
+# =======================
+# AI ANALYSIS
+# =======================
+
 def analyze_document(text: str) -> dict:
     if not text or len(text.strip()) < 50:
         logging.warning("Text too short for AI analysis")
@@ -100,56 +97,48 @@ Text:
     except Exception as e:
         logging.error(f"LLM analysis failed: {e}")
         return {}
-=======
-from processors.text_extractor import extract_text_from_file
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 
-def process_files(recursive=False) :
+# =======================
+# FILE PROCESSING
+# =======================
+
+def process_files(recursive=False):
     results = []
 
     iterator = INPUT_DIR.rglob("*") if recursive else INPUT_DIR.iterdir()
-    
+
     for file in iterator:
         try:
             if not file.is_file():
                 continue
 
-            # Choose extraction method
+            # Extract text
             if file.suffix.lower() == ".pdf":
                 text = extract_text_from_pdf(file)
             else:
                 text = extract_text_from_file(file)
 
-            # Skip empty text
             if not text or not text.strip():
                 logging.warning(f"No text found in file: {file.name}")
                 continue
 
-            # 3️⃣ AI ANALYSIS (THIS IS THE LINE YOU ASKED ABOUT)
             analysis = analyze_document(text)
 
-            # Metadata
             info = {
                 "filename": file.name,
                 "extension": file.suffix.lower(),
                 "size_bytes": file.stat().st_size,
-<<<<<<< HEAD
                 "text_length": len(text),
                 "processed_at": datetime.utcnow().isoformat(),
                 "document_type": analysis.get("document_type"),
-                "summary": analysis.get("summary")
-}
-
-=======
-                "processed_at": datetime.utcnow().isoformat()
+                "summary": analysis.get("summary"),
             }
-           
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
+
             results.append(info)
 
             # Save extracted text
-            text_output_path = TEXT_OUTPUT_DIR / f"{file.stem}.txt"
-            text_output_path.write_text(text, encoding="utf-8")
+            text_path = TEXT_OUTPUT_DIR / f"{file.stem}.txt"
+            text_path.write_text(text, encoding="utf-8")
 
             logging.info(f"Processed file: {file.name}")
 
@@ -158,30 +147,19 @@ def process_files(recursive=False) :
 
     return results
 
-<<<<<<< HEAD
-=======
- 
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
+# =======================
+# PDF REPORT
+# =======================
+
 def generate_report(results):
     report_path = OUTPUT_DIR / "document_analysis_report.pdf"
 
     try:
-<<<<<<< HEAD
         c = canvas.Canvas(str(report_path), pagesize=A4)
+
         width, height = A4
-=======
-        with report_path.open("w", encoding="utf-8") as f:
-            for item in results:
-                f.write(
-                    f"File: {item['filename']} | "
-                    f"Size: {item['size_bytes']} bytes | "
-                    f"Processed: {item['processed_at']}\n"
-                )
->>>>>>> 072278f8a637b5ec0a37749d9bd178f8b608f6b4
 
         y = height - 2 * cm
-
-        # Report title
         c.setFont("Helvetica-Bold", 18)
         c.drawString(2 * cm, y, "Document Processing & AI Analysis Report")
 
@@ -222,35 +200,24 @@ def generate_report(results):
 
     return report_path
 
+# =======================
+# CLI
+# =======================
+
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Document Processing Automation"
-    )
+    parser = argparse.ArgumentParser(description="Document Processing Automation")
 
-    parser.add_argument(
-        "--input",
-        type=str,
-        default="src/input",
-        help="Input folder path"
-    )
-
-    parser.add_argument(
-        "--output",
-        type=str,
-        default="src/output",
-        help="Output folder path"
-    )
-
-    parser.add_argument(
-        "--recursive",
-        action="store_true",
-        help="Recursively scan subdirectories"
-    )
+    parser.add_argument("--input", type=str, default="src/input")
+    parser.add_argument("--output", type=str, default="src/output")
+    parser.add_argument("--recursive", action="store_true")
 
     return parser.parse_args()
 
+# =======================
+# MAIN
+# =======================
+
 if __name__ == "__main__":
-   
     args = parse_args()
 
     INPUT_DIR = Path(args.input).resolve()
